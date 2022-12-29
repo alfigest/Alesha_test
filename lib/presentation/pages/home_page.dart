@@ -15,6 +15,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  String url = "";
   @override
   void initState() {
     super.initState();
@@ -362,12 +363,20 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
         const Spacer(),
-        CircleAvatar(
-          radius: 24,
-          backgroundImage: NetworkImage(
-            user.photoURL ?? 'https://api.multiavatar.com/${user.uid}.png',
-          ),
-        ),
+        url == ""
+            ? Image(
+                image: AssetImage(
+                  'assets/profile.png',
+                ),
+                width: 50,
+                height: 50,
+              )
+            : CircleAvatar(
+                radius: 24,
+                backgroundImage: NetworkImage(
+                  url,
+                ),
+              )
       ],
     );
   }
