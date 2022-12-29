@@ -12,6 +12,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String url = "";
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
@@ -32,13 +33,20 @@ class ProfilePage extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  CircleAvatar(
-                    radius: 59,
-                    backgroundImage: NetworkImage(
-                      user.photoURL ??
-                          'https://api.multiavatar.com/${user.uid}.png',
-                    ),
-                  ),
+                  url == ""
+                      ? Image(
+                          image: AssetImage(
+                            'assets/profile.png',
+                          ),
+                          width: 50,
+                          height: 50,
+                        )
+                      : CircleAvatar(
+                          radius: 24,
+                          backgroundImage: NetworkImage(
+                            url,
+                          ),
+                        ),
                   const SizedBox(height: 10),
                   Text(
                     user.displayName ?? 'No Name',
